@@ -9,8 +9,8 @@ class Protected(Resource):
     def get(self):
         return {"msg": "这是需要Token的GET方法"}, 200
 
-    @roles_required('admin')  # 不满足则跳转至SECURITY_UNAUTHORIZED_VIEW
     @auth_token_required
+    @roles_required('admin')  # 不满足则跳转至SECURITY_UNAUTHORIZED_VIEW
     def post(self):
         return {"msg": "这是需要Token和admin权限的POST方法"}, 201
 

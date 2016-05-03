@@ -19,3 +19,25 @@
 pip install -r ./requirement.txt
 python manage.py
 ```
+
+#测试
+```
+$ curl -X POST -H "Content-Type:application/json" -d '{"username":"test1","password":"test1"}' http://localhost:5000/login
+{
+    "message": "登录成功",
+    "token": "WyIxIiwiOThiZmVlMjFlZjljYTU0NzZkYzNmMTUyODUzNDM2MzgiXQ.CgpV7Q.ypduIJefgJAdHAbB_WIrLzfsXYc"
+}
+```
+```
+$ curl -H "Content-Type:application/json" -H "Authorization: WyIxIiwiOThiZmVlMjFlZjljYTU0NzZkYzNmMTUyODUzNDM2MzgiXQ.CgpV7Q.ypduIJefgJAdHAbB_WIrLzfsXYc" "http://localhost:5000/protected"
+{
+    "msg": "这是需要Token的GET方法"
+}
+```
+```
+$ curl -X POST -H "Authorization: WyIxIiwiOThiZmVlMjFlZjljYTU0NzZkYzNmMTUyODUzNDM2MzgiXQ.CgpV7Q.ypduIJefgJAdHAbB_WIrLzfsXYc" "http://localhost:5000/protected"
+{
+    "msg": "这是需要Token和admin权限的POST方法"
+}
+
+```
